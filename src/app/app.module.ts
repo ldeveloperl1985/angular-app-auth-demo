@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { RedirectComponent } from './redirect/redirect.component';
 import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { UserComponent } from './user/user.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,9 +3,7 @@ import {environment} from '../../environments/environment';
 import {
   AuthorizationServiceConfigurationJson,
   AuthorizationServiceConfiguration,
-  AuthorizationNotifier,
-  AuthorizationRequest,
-  RedirectRequestHandler
+  AuthorizationRequest, RedirectRequestHandler
 } from '@openid/appauth';
 
 @Component({
@@ -18,24 +16,9 @@ export class HomeComponent implements OnInit {
   configuration: AuthorizationServiceConfigurationJson = null;
   error: any = null;
   authorizationHandler: any = null;
-  notifier: any = null;
-  request: any = null;
-  response: any = null;
-  code: string = null;
 
   constructor() {
     this.authorizationHandler = new RedirectRequestHandler();
-    this.notifier = new AuthorizationNotifier();
-    this.authorizationHandler.setAuthorizationNotifier(this.notifier);
-    this.notifier.setAuthorizationListener((request, response, error) => {
-      console.log('Authorization request complete ', request, response, error);
-      if (response) {
-        this.request = request;
-        this.response = response;
-        this.code = response.code;
-        console.log(`Authorization Code  ${response.code}`);
-      }
-    });
   }
 
   ngOnInit() {

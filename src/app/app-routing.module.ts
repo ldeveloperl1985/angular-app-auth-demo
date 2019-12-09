@@ -7,11 +7,11 @@ import {UserComponent} from './user/user.component';
 const routes: Routes = [
   {path: '', component: HomeComponent, pathMatch: 'full'},
   {path: 'redirect', component: RedirectComponent, pathMatch: 'full'},
-  {path: 'users', component: UserComponent, pathMatch: 'full'},
+  {path: 'user', component: UserComponent, pathMatch: 'full'},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
