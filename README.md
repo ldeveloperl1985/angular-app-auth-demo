@@ -1,27 +1,51 @@
-# AppauthAngularDemo
+# App-Auth JS Angular Demo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.6.
+## Prerequisites
+1. Gluu Server 4.0
+1. Node JS >= 10.x.x
 
-## Development server
+## Installation
+1. Clone this repo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+        $ git clone https://github.com/ldeveloperl1985/angular-app-auth-demo.git
 
-## Code scaffolding
+1. Install dependency
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+       $ sudo npm install -g @angular/cli
+       $ cd angular-app-auth-demo
+       $ npm install
 
-## Build
+## Start Project
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+      $ cd angular-app-auth-demo
+      $ npm start
 
-## Running unit tests
+It will start you app on `http://localhost:4200`.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Configuration
 
-## Running end-to-end tests
+Use [environment.ts](https://github.com/ldeveloperl1985/angular-app-auth-demo/blob/master/src/environments/environment.ts) for OP Server and Client configuration.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Tips for other SPA Application
 
-## Further help
+1. You need to install first `npm install --save @openid/appauth`.
+1. The first thing is to generate the authorization url and redirect to OP server for auth. For this please check the [home.component.ts](https://github.com/ldeveloperl1985/angular-app-auth-demo/blob/master/src/app/home/home.component.ts). 
+     I've imported the modules like below from appauth-js lib. I think this is the same way for other SPA technologies.
+     ```
+     import {
+         AuthorizationServiceConfigurationJson,
+         AuthorizationServiceConfiguration,
+         AuthorizationRequest, RedirectRequestHandler
+     } from '@openid/appauth';
+     ```
+1. Second step is after OP auth, OP redirect back to your SPA application to get code from URL and request for `access_token`.
+      Check [redirect.component.ts](https://github.com/ldeveloperl1985/angular-app-auth-demo/blob/master/src/app/redirect/redirect.component.ts) for this. 
+      Flow start from `this.authorizationHandler.completeAuthorizationRequestIfPossible();` which is responsible for get `code` and `state` from URL and further flow.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Important
+
+There is bug in appauth js to get code and state from the URL. it is only read this when you have `#` in URL. Current days all the SPA don't really recommended to use `#` in URL but this lib need `#`.
+
+If you don't want to put `#` in URL then you need to manually get code from URL.
+
+Currently I set `useHash: true` for my angular app. here (app-routing.module.ts)[https://github.com/ldeveloperl1985/angular-app-auth-demo/blob/master/src/app/app-routing.module.ts#L14]
