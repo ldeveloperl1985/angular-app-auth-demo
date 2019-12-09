@@ -29,6 +29,7 @@ Use [environment.ts](https://github.com/ldeveloperl1985/angular-app-auth-demo/bl
 ## Tips for other SPA Application
 
 1. You need to install first `npm install --save @openid/appauth`.
+1. `appauth-js` by default provide the PKCE check.
 1. For any operation you need to first fetch configuration `AuthorizationServiceConfiguration.fetchFromIssuer(environment.openid_connect_url)`. Take a look on code [here](https://github.com/ldeveloperl1985/angular-app-auth-demo/blob/master/src/app/home/home.component.ts#L27). you will get idea.
 1. The first thing is to generate the authorization url and redirect to OP server for auth. For this please check the [home.component.ts](https://github.com/ldeveloperl1985/angular-app-auth-demo/blob/master/src/app/home/home.component.ts). 
      I've imported the modules like below from appauth-js lib. I think this is the same way for other SPA technologies.
