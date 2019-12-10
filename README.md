@@ -1,5 +1,7 @@
 # App-Auth JS Angular Demo
 
+[![angular-appauth-demo.gif](angular-appauth-demo.gif)](angular-appauth-demo.gif)
+
 ## Prerequisites
 1. Gluu Server 4.0
 1. Node JS >= 10.x.x
@@ -25,6 +27,7 @@ It will start you app on `http://localhost:4200`.
 ## Configuration
 
 1. Use Gluu Admin UI oxTrust to create OP Client. Go to `OpenID Connect > Clients > + Add Client`
+   Set `Authnetication method for the Token endpoint : none` because there is no facility in appauth-js to handle this.
    [![client-config.png](client-config.png)](client-config.png)
 
 1. Use [environment.ts](https://github.com/ldeveloperl1985/angular-app-auth-demo/blob/master/src/environments/environment.ts) for OP Server and Client configuration in Angular App.
