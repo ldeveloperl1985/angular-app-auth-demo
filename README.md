@@ -46,8 +46,16 @@ Use [environment.ts](https://github.com/ldeveloperl1985/angular-app-auth-demo/bl
 
 ## Important
 
-There is bug in appauth js to get code and state from the URL. it is only read this when you have `#` in URL. Current days all the SPA don't really recommended to use `#` in URL but this lib need `#`.
+1. There is support in appauth-js to pass and customize the URL parser.
 
-If you don't want to put `#` in URL then you need to manually get code from URL.
+   Use [noHashQueryStringUtils.ts](https://github.com/ldeveloperl1985/angular-app-auth-demo/blob/master/src/app/noHashQueryStringUtils.ts) for custom parser and pass it to `RedirectRequestHandler` and `BaseTokenRequestHandler`. [Reference issue](https://github.com/openid/AppAuth-JS/issues/98)
 
-Currently I set `useHash: true` for my angular app. here (app-routing.module.ts)[https://github.com/ldeveloperl1985/angular-app-auth-demo/blob/master/src/app/app-routing.module.ts#L14]
+2. If your provider does not support PKCE then set null last param null in `RedirectRequestHandler`. [Reference issue](https://github.com/openid/AppAuth-JS/issues/98)
+
+```
+  this.authorizationHandler = new RedirectRequestHandler(
+  new LocalStorageBackend(),
+  new NoHashQueryStringUtils(), 
+  window.location,
+  new DefaultCrypto()); // null if your provider does not support PKCE
+``` 

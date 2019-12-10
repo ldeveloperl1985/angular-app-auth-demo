@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   client_id: 'fdd62388-3c65-4a48-993c-149c771cd17c',
-  redirect_uri: 'http://localhost:4200/#/redirect',
+  redirect_uri: 'http://localhost:4200/redirect',
   openid_connect_url: 'https://gluu.local.org',
   scope: 'openid',
   extra: {prompt: 'consent', access_type: 'offline'}

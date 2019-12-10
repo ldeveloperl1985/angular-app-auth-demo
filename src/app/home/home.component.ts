@@ -3,8 +3,10 @@ import {environment} from '../../environments/environment';
 import {
   AuthorizationServiceConfigurationJson,
   AuthorizationServiceConfiguration,
-  AuthorizationRequest, RedirectRequestHandler
+  AuthorizationRequest, RedirectRequestHandler,
+  FetchRequestor, LocalStorageBackend, DefaultCrypto
 } from '@openid/appauth';
+import {NoHashQueryStringUtils} from '../noHashQueryStringUtils';
 
 @Component({
   selector: 'app-home',
@@ -18,14 +20,14 @@ export class HomeComponent implements OnInit {
   authorizationHandler: any = null;
 
   constructor() {
-    this.authorizationHandler = new RedirectRequestHandler();
+    this.authorizationHandler = new RedirectRequestHandler(new LocalStorageBackend(), new NoHashQueryStringUtils(), window.location, new DefaultCrypto());
   }
 
   ngOnInit() {
   }
 
   redirect() {
-    AuthorizationServiceConfiguration.fetchFromIssuer(environment.openid_connect_url)
+    AuthorizationServiceConfiguration.fetchFromIssuer(environment.openid_connect_url, new FetchRequestor())
       .then((response: any) => {
         this.configuration = response;
         const authRequest = new AuthorizationRequest({
@@ -41,6 +43,5 @@ export class HomeComponent implements OnInit {
       .catch(error => {
         this.error = error;
       });
-
   }
 }
