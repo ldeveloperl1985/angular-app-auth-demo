@@ -24,8 +24,11 @@ It will start you app on `http://localhost:4200`.
 
 ## Configuration
 
-Use [environment.ts](https://github.com/ldeveloperl1985/angular-app-auth-demo/blob/master/src/environments/environment.ts) for OP Server and Client configuration.
+1. Use Gluu Admin UI oxTrust to create OP Client. Go to `OpenID Connect > Clients > + Add Client`
+   [![client-config.png](client-config.png)](client-config.png)
 
+1. Use [environment.ts](https://github.com/ldeveloperl1985/angular-app-auth-demo/blob/master/src/environments/environment.ts) for OP Server and Client configuration in Angular App.
+   
 ## Tips for other SPA Application
 
 1. You need to install first `npm install --save @openid/appauth`.
