@@ -52,10 +52,18 @@ Use [environment.ts](https://github.com/ldeveloperl1985/angular-app-auth-demo/bl
 
 2. If your provider does not support PKCE then set null last param null in `RedirectRequestHandler`. [Reference issue](https://github.com/openid/AppAuth-JS/issues/98)
 
-```
-  this.authorizationHandler = new RedirectRequestHandler(
-  new LocalStorageBackend(),
-  new NoHashQueryStringUtils(), 
-  window.location,
-  new DefaultCrypto()); // null if your provider does not support PKCE
-``` 
+   ```
+     this.authorizationHandler = new RedirectRequestHandler(
+     new LocalStorageBackend(),
+     new NoHashQueryStringUtils(), 
+     window.location,
+     new DefaultCrypto()); // null if your provider does not support PKCE
+   ```
+
+3. No need for Jquery, you can pass `fetch` api for request. [Reference issue](https://github.com/openid/AppAuth-JS/issues/100)
+
+   ```
+   AuthorizationServiceConfiguration.fetchFromIssuer(environment.openid_connect_url, new FetchRequestor())
+   
+   this.tokenHandler = new BaseTokenRequestHandler(new FetchRequestor());
+   ```
